@@ -5,7 +5,7 @@ import { Form } from "@builder.io/qwik-city";
 import { PrismaClient } from "@prisma/client";
 import { AuthComponent } from "~/components/auth/AuthComponent";
 
-export const useLoginUser = routeAction$(async (data, { cookie }) => {
+export const useLoginUser = routeAction$(async (data, { cookie, redirect }) => {
   const prisma = new PrismaClient();
   const user = await prisma.user.findFirst({
     where: { email: data.email.toString(), password: data.password.toString() },
@@ -18,6 +18,7 @@ export const useLoginUser = routeAction$(async (data, { cookie }) => {
   }
 
   cookie.set("user", user);
+  redirect(301, "/pokemons?limit=30&offset=0");
 
   return {
     ok: true,

@@ -4,7 +4,7 @@ import { Form } from "@builder.io/qwik-city";
 import { routeAction$ } from "@builder.io/qwik-city";
 import { PrismaClient } from "@prisma/client";
 import { AuthComponent } from "~/components/auth/AuthComponent";
-export const useAuthUser = routeAction$(async (data, { cookie }) => {
+export const useAuthUser = routeAction$(async (data, { cookie, redirect }) => {
   const prisma = new PrismaClient();
   const user = await prisma.user.create({
     data: {
@@ -13,6 +13,7 @@ export const useAuthUser = routeAction$(async (data, { cookie }) => {
     },
   });
   cookie.set("user", user);
+  redirect(301, "/pokemons?limit=30&offset=0");
   return {
     ok: true,
     msg: "user Created Succesfully",
