@@ -30,5 +30,6 @@ h1 {
 }
 
 .pokemon-card img {
+  object-fit: cover;
   background-color: #fff;
 }
