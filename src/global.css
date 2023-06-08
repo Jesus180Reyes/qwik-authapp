@@ -48,3 +48,25 @@
   cursor: pointer;
   margin-top: 30px;
 }
+
+.navbar-container {
+  width: 100%;
+  height: 10vh;
+  align-items: center;
+  font-size: 1.5rem;
+  display: flex;
+  background-color: #292f3b;
+  color: #fff;
+  justify-content: space-between;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.user-details {
+  display: flex;
+  margin-left: 10px;
+}
+
+.user-details p {
+  margin-right: 20px;
+}

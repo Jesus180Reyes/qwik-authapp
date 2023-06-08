@@ -1,5 +1,6 @@
 import style from "./pokemons.css?inline";
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import { PokemonCard } from "~/components/pokemon/PokemonCard";
 import type { PokemonsResponse } from "~/interfaces/pokemons_response_interface";
@@ -8,7 +9,7 @@ export const usePokemonsClients = routeLoader$(async ({ query }) => {
   const limit = Number(query.get("limit"));
   const offset = Number(query.get("offset"));
   const resp = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit || 50}&offset=${offset}`
   );
   const data: PokemonsResponse = await resp.json();
   const id = data.results.map((pokemon) => {
@@ -33,3 +34,13 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Pokemon Page",
+  meta: [
+    {
+      name: "Pokemon",
+      content: "This page for view all the pokemons",
+    },
+  ],
+};
