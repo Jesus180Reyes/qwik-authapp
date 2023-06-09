@@ -28,6 +28,7 @@ export default component$(() => {
     <>
       <Navbar>
         <p q:slot="slot-user-details">{usersignal.value.value?.email}</p>
+        <button q:slot="slot-user-details">Signout</button>
       </Navbar>
       <Slot />
     </>

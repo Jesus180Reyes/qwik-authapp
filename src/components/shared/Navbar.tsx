@@ -59,7 +59,6 @@ export const Navbar = component$(() => {
       </div>
       <div class="user-details">
         <Slot name="slot-user-details" />
-        <p>SignOut</p>
       </div>
       {/* <code>{JSON.stringify(user.value)}</code> */}
     </div>
