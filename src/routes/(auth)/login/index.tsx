@@ -18,7 +18,7 @@ export const useLoginUser = routeAction$(async (data, { cookie, redirect }) => {
   }
 
   cookie.set("user", user, { secure: true, path: "/" });
-  redirect(301, "/pokemons?limit=30&offset=0");
+  redirect(301, "/pokemons?limit=50&offset=0");
 
   return {
     ok: true,

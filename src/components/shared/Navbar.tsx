@@ -1,7 +1,8 @@
-import { Slot, component$ } from "@builder.io/qwik";
+import { Slot, component$, useStylesScoped$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-
+import style from "../../global.css?inline";
 export const Navbar = component$(() => {
+  useStylesScoped$(style);
   return (
     <div class="navbar-container">
       <div class="items-nav">

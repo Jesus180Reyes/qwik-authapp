@@ -1,6 +1,13 @@
 import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import { routeLoader$ } from "@builder.io/qwik-city";
 import type { PokemonsResponse } from "~/interfaces/pokemons_response_interface";
-
+export const useIsUserAuth = routeLoader$(({ cookie, redirect }) => {
+  const user = cookie.get("user");
+  if (!user) {
+    redirect(301, "/login/");
+    return;
+  }
+});
 export default component$(() => {
   const pokemons = useSignal<PokemonsResponse>();
   useVisibleTask$(async () => {

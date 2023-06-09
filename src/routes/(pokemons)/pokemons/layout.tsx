@@ -1,10 +1,19 @@
-import { Slot, component$, useStore } from "@builder.io/qwik";
+import { Slot, component$, useSignal } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import { Navbar } from "~/components/shared/Navbar";
 
-export const useCookies = routeLoader$(({ cookie }) => {
+export const useCookies = routeLoader$(({ cookie, redirect }) => {
   const user = cookie.get("user");
-  const { email, id, password, state } = user!.json() as any;
+  if (!user) {
+    redirect(301, "/login/");
+    return;
+  }
+  const {
+    email = "",
+    id = 0,
+    password = "",
+    state = true,
+  } = user!.json() as any;
   return {
     email,
     id,
@@ -14,16 +23,11 @@ export const useCookies = routeLoader$(({ cookie }) => {
 });
 export default component$(() => {
   const user = useCookies();
-  const userStore = useStore({
-    email: user.value!.email,
-    id: user.value!.id,
-    password: user.value!.password,
-    state: user.value!.state,
-  });
+  const usersignal = useSignal(user);
   return (
     <>
       <Navbar>
-        <p q:slot="slot-user-details">{userStore.email}</p>
+        <p q:slot="slot-user-details">{usersignal.value.value?.email}</p>
       </Navbar>
       <Slot />
     </>
