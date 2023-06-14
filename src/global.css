@@ -70,3 +70,11 @@
 .user-details p {
   margin-right: 20px;
 }
+.links-items {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+.links-items:hover {
+  color: #f1f1f195;
+}

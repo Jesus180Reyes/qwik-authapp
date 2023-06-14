@@ -59,4 +59,9 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title: "Login Page",
+  meta: [
+    {
+      content: "Login Page ",
+    },
+  ],
 };

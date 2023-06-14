@@ -6,61 +6,25 @@ export const Navbar = component$(() => {
   return (
     <div class="navbar-container">
       <div class="items-nav">
-        <Link
-          style={{
-            "margin-right": "10px",
-            "text-decoration": "none",
-            color: "#fff",
-          }}
-          href="/"
-        >
+        <Link href="/" class="links-items">
           Home
         </Link>
-        <Link
-          style={{
-            "margin-right": "10px",
-            "text-decoration": "none",
-            color: "#fff",
-          }}
-          href="/pokemons/"
-        >
+        <Link href="/pokemons/" class="links-items">
           Pokemons
         </Link>
-        <Link
-          style={{
-            "margin-right": "10px",
-            "text-decoration": "none",
-            color: "#fff",
-          }}
-          href="/ssr/"
-        >
+        <Link href="/ssr/" class="links-items">
           SSR
         </Link>
-        <Link
-          style={{
-            "margin-right": "10px",
-            "text-decoration": "none",
-            color: "#fff",
-          }}
-          href="/client/"
-        >
+        <Link href="/client/" class="links-items">
           Client
         </Link>
-        <Link
-          style={{
-            "margin-right": "10px",
-            "text-decoration": "none",
-            color: "#fff",
-          }}
-          href="/api/pokemons/"
-        >
+        <Link href="/api/pokemons/" class="links-items">
           API Pokemons
         </Link>
       </div>
       <div class="user-details">
         <Slot name="slot-user-details" />
       </div>
-      {/* <code>{JSON.stringify(user.value)}</code> */}
     </div>
   );
 });

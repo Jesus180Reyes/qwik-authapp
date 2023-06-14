@@ -1,4 +1,5 @@
 import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { PokemonsResponse } from "~/interfaces/pokemons_response_interface";
 export const useIsUserAuth = routeLoader$(({ cookie, redirect }) => {
@@ -33,3 +34,12 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Pokemon Client",
+  meta: [
+    {
+      content: "Pokemon Client SSC",
+    },
+  ],
+};

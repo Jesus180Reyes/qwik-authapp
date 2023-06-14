@@ -52,4 +52,9 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title: "Register Page",
+  meta: [
+    {
+      content: "Register Page",
+    },
+  ],
 };
