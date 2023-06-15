@@ -1,7 +1,6 @@
 import { Slot, component$, useSignal } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { routeLoader$, useNavigate } from "@builder.io/qwik-city";
 import { Navbar } from "~/components/shared/Navbar";
-
 export const useCookies = routeLoader$(({ cookie, redirect }) => {
   const user = cookie.get("user");
   if (!user) {
@@ -21,14 +20,18 @@ export const useCookies = routeLoader$(({ cookie, redirect }) => {
     state,
   };
 });
+
 export default component$(() => {
   const user = useCookies();
   const usersignal = useSignal(user);
+  const navigate = useNavigate();
   return (
     <>
       <Navbar>
         <p q:slot="slot-user-details">{usersignal.value.value?.email}</p>
-        <button q:slot="slot-user-details">Signout</button>
+        <button q:slot="slot-user-details" onClick$={() => navigate("/login/")}>
+          Signout
+        </button>
       </Navbar>
       <Slot />
     </>

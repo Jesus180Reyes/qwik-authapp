@@ -74,7 +74,9 @@
   margin-right: 10px;
   text-decoration: none;
   color: #fff;
+  cursor: pointer;
 }
 .links-items:hover {
   color: #f1f1f195;
+  text-decoration: none;
 }

@@ -28,7 +28,10 @@ h1 {
   height: 140px;
   width: 140px;
 }
-
+.pokemon-card h2 {
+  text-decoration: none;
+  color: #fff;
+}
 .pokemon-card img {
   object-fit: cover;
   background-color: #fff;
