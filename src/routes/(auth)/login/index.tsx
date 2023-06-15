@@ -1,31 +1,40 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { routeAction$ } from "@builder.io/qwik-city";
+import { routeAction$, z, zod$ } from "@builder.io/qwik-city";
 import { Form } from "@builder.io/qwik-city";
 import { PrismaClient } from "@prisma/client";
 import { AuthComponent } from "~/components/auth/AuthComponent";
 
-export const useLoginUser = routeAction$(async (data, { cookie, redirect }) => {
-  const prisma = new PrismaClient();
-  const user = await prisma.user.findFirst({
-    where: { email: data.email.toString(), password: data.password.toString() },
-  });
-  if (!user) {
+export const useLoginUser = routeAction$(
+  async (data, { cookie, redirect }) => {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.findFirst({
+      where: {
+        email: data.email.toString(),
+        password: data.password.toString(),
+      },
+    });
+    if (!user) {
+      return {
+        ok: false,
+        msg: "Credenciales no validas",
+      };
+    }
+
+    cookie.set("user", user, { secure: true, path: "/", maxAge: 300 });
+    redirect(301, "/pokemons?limit=50&offset=0");
+
     return {
-      ok: false,
-      msg: "Credenciales no validas",
+      ok: true,
+      msg: "Logged",
+      user,
     };
-  }
-
-  cookie.set("user", user, { secure: true, path: "/", maxAge: 300 });
-  redirect(301, "/pokemons?limit=50&offset=0");
-
-  return {
-    ok: true,
-    msg: "Logged",
-    user,
-  };
-});
+  },
+  zod$({
+    email: z.string().email("Email no valido"),
+    password: z.string().min(6, "Debe ser mayor a 6 Caracteres"),
+  })
+);
 export default component$(() => {
   const action = useLoginUser();
   return (

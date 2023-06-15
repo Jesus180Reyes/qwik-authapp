@@ -9,15 +9,15 @@ export const onPost: RequestHandler = async (request) => {
       where: { email: body.email, password: body.password },
     });
 
+    if (!user) {
+      request.json(403, { ok: false, msg: "Credenciales incorrectas" });
+      return;
+    }
     if (!user?.state) {
       request.json(403, {
         ok: false,
         msg: "Estas actualmente baneado de la plataforma",
       });
-      return;
-    }
-    if (!user) {
-      request.json(403, { ok: false, msg: "Credenciales incorrectas" });
       return;
     }
     request.json(200, { ok: true, msg: "Logged", user });
